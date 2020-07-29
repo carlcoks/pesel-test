@@ -1,0 +1,20 @@
+.container
+  width: 100%
+  margin: 0 auto
+  max-width: $max-width
+  padding: 0px $site-padding
+  &--full
+    max-width: 100%
+
+.row
+  width: 100%
+  display: flex
+  flex-wrap: wrap
+
+@include for-size(tablet)
+  .container
+    padding: 0px 30px
+
+@include for-size(mobile)
+  .container
+    padding: 0px 15px

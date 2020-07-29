@@ -17,6 +17,13 @@
         </span>
       </a>
 
+      <p
+        v-if="this.$route.params.breed"
+        class="filter__item active"
+      >
+        {{ this.$route.params.breed }}
+      </p>
+
       <label
         for="sort"
         class="filter__label"
@@ -41,9 +48,14 @@
         Все пёсели
       </a>
       <div class="filter__alphabet">
-        <div class="filter__alphabet-line">
-          {{ breeds }}
-        </div>
+        <a
+          v-for="(value, key) in breeds"
+          :key="key"
+          :href="`/${key}`"
+          class="filter__alphabet-line"
+        >
+          {{ key }}
+        </a>
       </div>
     </div>
   </div>

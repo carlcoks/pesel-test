@@ -35,7 +35,6 @@ export default {
       }
     })
     this.loadMore()
-    console.log(this.$route.params.breed)
   },
   methods: {
     ...mapActions('current', ['getCurrent']),

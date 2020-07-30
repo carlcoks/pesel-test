@@ -45,7 +45,7 @@ export default {
       } else {
         await this.getCurrent(`${this.$route.params.breed}`)
       }
-      await this.current.forEach(el => this.newImgs.push(el))
+      this.current.forEach(el => this.newImgs.push(el))
     }
   }
 }

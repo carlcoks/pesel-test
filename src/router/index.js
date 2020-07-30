@@ -28,7 +28,7 @@ export default new Router({
     },
     {
       path: '/:breed/:name',
-      name: 'breed',
+      name: 'name',
       component: CurrentBreed
     }
   ]

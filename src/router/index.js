@@ -25,6 +25,11 @@ export default new Router({
       path: '/:breed',
       name: 'breed',
       component: CurrentBreed
+    },
+    {
+      path: '/:breed/:name',
+      name: 'breed',
+      component: CurrentBreed
     }
   ]
 })

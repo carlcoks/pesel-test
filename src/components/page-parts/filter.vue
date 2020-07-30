@@ -18,10 +18,16 @@
       </a>
 
       <p
-        v-if="this.$route.params.breed"
+        v-if="routeBreed"
         class="filter__item active"
       >
-        {{ this.$route.params.breed }}
+        {{ routeBreed }}
+      </p>
+      <p
+        v-if="routeName"
+        class="filter__item active"
+      >
+        {{ routeName }}
       </p>
 
       <label
@@ -42,20 +48,42 @@
       class="filter__list"
     >
       <a
-        href="#"
+        href="/"
         class="filter__item active"
       >
         Все пёсели
       </a>
-      <div class="filter__alphabet">
-        <a
+      <div
+        v-if="!routeBreed"
+        class="filter__alphabet"
+      >
+        <div
           v-for="(value, key) in breeds"
           :key="key"
-          :href="`/${key}`"
-          class="filter__alphabet-line"
         >
-          {{ key }}
-        </a>
+          <a
+            :href="`/${key}`"
+            class="filter__alphabet-line"
+          >
+            {{ key }}
+          </a>
+        </div>
+      </div>
+      <div
+        v-if="routeBreed"
+        class="filter__alphabet"
+      >
+        <div
+          v-for="(value, i) of breeds[routeBreed]"
+          :key="i"
+        >
+          <a
+            :href="`/${routeBreed}/${value}`"
+            class="filter__alphabet-line"
+          >
+            {{ value }}&nbsp;
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -68,7 +96,9 @@ export default {
   name: 'FilterBlock',
   data () {
     return {
-      opened: false
+      opened: false,
+      routeBreed: this.$route.params.breed,
+      routeName: this.$route.params.name
     }
   },
   computed: {

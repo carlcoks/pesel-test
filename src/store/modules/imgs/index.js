@@ -24,7 +24,13 @@ const actions = {
 
 const mutations = {
   [TYPES.SET_IMGS] (state, payload) {
-    state.imgs = payload
+    payload.forEach((item, i) => {
+      state.imgs.push(item)
+    })
+  },
+
+  [TYPES.RESET] (state, payload) {
+    state.imgs = []
   }
 }
 

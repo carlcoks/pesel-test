@@ -47,12 +47,12 @@
       ref="list"
       class="filter__list"
     >
-      <a
-        href="/"
+      <router-link
+        to="/"
         class="filter__item active"
       >
         Все пёсели
-      </a>
+      </router-link>
       <div
         v-if="!routeBreed"
         class="filter__alphabet"
@@ -61,12 +61,12 @@
           v-for="(value, key) in breeds"
           :key="key"
         >
-          <a
-            :href="`/${key}`"
+          <router-link
+            :to="`/${key}`"
             class="filter__alphabet-line"
           >
             {{ key }}
-          </a>
+          </router-link>
         </div>
       </div>
       <div
@@ -77,12 +77,12 @@
           v-for="(value, i) of breeds[routeBreed]"
           :key="i"
         >
-          <a
-            :href="`/${routeBreed}/${value}`"
+          <router-link
+            :to="`/${routeBreed}/${value}`"
             class="filter__alphabet-line"
           >
             {{ value }}&nbsp;
-          </a>
+          </router-link>
         </div>
       </div>
     </div>

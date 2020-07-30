@@ -27,14 +27,14 @@ export default {
   computed: {
     ...mapState('current', ['current'])
   },
-  mounted () {
+  async mounted () {
+    await this.loadMore()
     const listElem = document.querySelector('#app')
-    listElem.addEventListener('scroll', e => {
+    document.addEventListener('scroll', e => {
       if (listElem.scrollTop + listElem.clientHeight >= listElem.scrollHeight) {
         this.loadMore()
       }
     })
-    this.loadMore()
   },
   methods: {
     ...mapActions('current', ['getCurrent']),

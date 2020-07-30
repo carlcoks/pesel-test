@@ -1,22 +1,22 @@
 <template>
-  <section class="index">
+  <div class="index">
     <div class="container">
-      <div class="index__box">
+      <div class="current__box">
         <filter-block />
-        <images />
+        <current />
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import FilterBlock from '@/components/page-parts/filter'
-import Images from '@/components/page-parts/images'
+import Current from '@/components/page-parts/current'
 
 export default {
-  name: 'IndexPage',
+  name: 'CurrentBreed',
   components: {
-    Images,
+    Current,
     FilterBlock
   }
 }

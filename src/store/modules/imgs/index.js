@@ -5,7 +5,10 @@ import * as TYPES from './types'
 const namespaced = true
 
 const state = () => ({
-  imgs: []
+  imgs: [],
+  sort: {
+    is: false
+  }
 })
 
 const actions = {
@@ -31,6 +34,12 @@ const mutations = {
 
   [TYPES.RESET] (state, payload) {
     state.imgs = []
+  },
+
+  [TYPES.SORT] (state) {
+    state.sort = {
+      is: true
+    }
   }
 }
 

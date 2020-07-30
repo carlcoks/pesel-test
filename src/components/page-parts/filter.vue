@@ -4,7 +4,7 @@
       <a
         @click.prevent="toggleList()"
         href="#"
-        :class="{ active : opened }"
+        :class="{ 'active' : opened }"
         class="filter__title"
       >
         Породы
@@ -33,6 +33,7 @@
       <label
         for="sort"
         class="filter__label"
+        @click="SORT"
       >
         Сортировка по алфавиту
         <input
@@ -90,7 +91,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'FilterBlock',
@@ -109,6 +110,7 @@ export default {
   },
   methods: {
     ...mapActions('dogs', ['getBreeds']),
+    ...mapMutations('imgs', ['SORT']),
 
     toggleList () {
       this.opened = !this.opened

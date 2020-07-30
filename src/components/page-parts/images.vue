@@ -3,11 +3,11 @@
     class="dog"
   >
     <img-component
-      v-for="(img, i) of sort"
+      v-for="(img, i) of sortEl"
       :key="i"
-      :style="{background: `url(${img.link})`}"
-      :class="['dog__img', i === 0 ? 'dog__img-big' : 'dog__img-sml']"
-      :img="img.link"
+      :style="{background: `url(${img})`}"
+      :class="['dog__img', i === 0 ? 'dog__img--big' : 'dog__img--sml']"
+      :img="img"
     />
   </div>
 </template>
@@ -23,59 +23,47 @@ export default {
   },
   data () {
     return {
-      newImgs: []
+      newImgs: [],
+      listElem: document.querySelector('#app')
     }
   },
   computed: {
-    ...mapState('imgs', ['imgs']),
+    ...mapState('imgs', ['imgs', 'sort']),
 
-    sort () {
-      const array = []
-      this.imgs.forEach(item => {
-        array.push({
-          name: this.getBreedName(item),
-          link: item
-        })
-      })
+    sortEl () {
+      if (this.sort.is) {
+        const array = []
 
-      array.sort(this.sortByName)
+        this.imgs.forEach(el => array.push(el))
 
-      return array
+        array.sort()
+
+        return array
+      } else {
+        return this.imgs
+      }
     }
   },
   async mounted () {
     this.RESET()
     await this.loadMore()
-    const listElem = document.querySelector('#app')
-    listElem.addEventListener('scroll', this.scroll)
+    this.listElem.addEventListener('scroll', this.scroll)
   },
   beforeDestroy () {
-    const listElem = document.querySelector('#app')
-    listElem.removeEventListener('scroll', this.scroll)
+    this.listElem.removeEventListener('scroll', this.scroll)
   },
   methods: {
     ...mapMutations('imgs', ['RESET']),
     ...mapActions('imgs', ['getImgs']),
 
-    sortByName (a, b) {
-      return a.name > b.name
-    },
-
     scroll () {
-      const listElem = document.querySelector('#app')
-      if (listElem.scrollTop + listElem.clientHeight >= listElem.scrollHeight) {
+      if (this.listElem.scrollTop + this.listElem.clientHeight >= this.listElem.scrollHeight) {
         this.loadMore()
       }
     },
 
     async loadMore () {
       await this.getImgs()
-      // await this.imgs.forEach(el => this.newImgs.push(el))
-    },
-
-    getBreedName (str) {
-      let arr = str.split('/')
-      return arr[4].split('-').shift()
     }
   }
 }

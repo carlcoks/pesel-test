@@ -4,21 +4,7 @@ const state = () => ({
   favorites: []
 })
 
-const actions = {
-  async getFavorites ({ commit }) {
-    try {
-      commit('updateFav')
-    } catch (e) {
-    }
-  },
-
-  getRemoveItem ({ commit }, value) {
-    try {
-      commit('removeFav', value)
-    } catch (e) {
-    }
-  }
-}
+const actions = {}
 
 const mutations = {
   updateFav (state) {

@@ -24,7 +24,13 @@ const actions = {
 
 const mutations = {
   [TYPES.SET_CURRENT] (state, payload) {
-    state.current = payload
+    payload.forEach((item, i) => {
+      state.current.push(item)
+    })
+  },
+
+  [TYPES.RESET] (state) {
+    state.current = []
   }
 }
 

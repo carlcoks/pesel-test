@@ -1,17 +1,17 @@
 <template>
   <div class="dog dog-mar">
     <img-component
-      v-for="(img, i) of newImgs"
+      v-for="(img, i) of current"
       :key="i"
       :style="{background: `url(${img})`}"
-      class="dog__img dog__img-sml"
+      class="dog__img dog__img--sml"
       :img="img"
     />
   </div>
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import {mapActions, mapMutations, mapState} from 'vuex'
 import ImgComponent from './img'
 
 export default {
@@ -21,23 +21,30 @@ export default {
   },
   data () {
     return {
-      newImgs: []
+      newImgs: [],
+      listElem: document.querySelector('#app')
     }
   },
   computed: {
     ...mapState('current', ['current'])
   },
   async mounted () {
+    this.RESET()
     await this.loadMore()
-    const listElem = document.querySelector('#app')
-    document.addEventListener('scroll', e => {
-      if (listElem.scrollTop + listElem.clientHeight >= listElem.scrollHeight) {
-        this.loadMore()
-      }
-    })
+    this.listElem.addEventListener('scroll', this.scroll)
+  },
+  beforeDestroy () {
+    this.listElem.removeEventListener('scroll', this.scroll)
   },
   methods: {
     ...mapActions('current', ['getCurrent']),
+    ...mapMutations('current', ['RESET']),
+
+    scroll () {
+      if (this.listElem.scrollTop + this.listElem.clientHeight >= this.listElem.scrollHeight) {
+        this.loadMore()
+      }
+    },
 
     async loadMore () {
       if (this.$route.params.name) {
@@ -45,7 +52,6 @@ export default {
       } else {
         await this.getCurrent(`${this.$route.params.breed}`)
       }
-      this.current.forEach(el => this.newImgs.push(el))
     }
   }
 }

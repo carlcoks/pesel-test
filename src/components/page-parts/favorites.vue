@@ -5,14 +5,14 @@
       :key="key"
       :style="{background: `url(${value})`}"
       v-if="value !== 'WARN'"
-      class="dog__img dog__img-sml"
+      class="dog__img dog__img--sml"
       :img="value"
     />
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import ImgComponent from './img'
 
 export default {
@@ -24,10 +24,10 @@ export default {
     ...mapState('favorites', ['favorites'])
   },
   methods: {
-    ...mapActions('favorites', ['getFavorites', 'getRemoveItem'])
+    ...mapMutations('favorites', ['updateFav'])
   },
   created () {
-    this.getFavorites()
+    this.updateFav()
   }
 }
 </script>

@@ -53,6 +53,13 @@ export default {
         await this.getCurrent(`${this.$route.params.breed}`)
       }
     }
+  },
+  watch: {
+    async '$route.params.name' () {
+      this.RESET()
+      await this.loadMore()
+      this.listElem.addEventListener('scroll', this.scroll)
+    }
   }
 }
 </script>

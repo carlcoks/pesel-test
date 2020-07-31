@@ -58,7 +58,6 @@ export default {
     async '$route.params.name' () {
       this.RESET()
       await this.loadMore()
-      this.listElem.addEventListener('scroll', this.scroll)
     }
   }
 }

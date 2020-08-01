@@ -1,5 +1,5 @@
 <template>
-  <div class="index">
+  <div class="current">
     <div class="container">
       <div class="current__box">
         <filter-block />

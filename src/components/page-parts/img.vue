@@ -1,20 +1,16 @@
 <template>
   <div>
     <button
-      v-if="!isFav"
-      @click="isFav = !isFav, likeImg(img)"
+      @click="!isFav ? likeImg(img) : removeLike(img), isFav = !isFav"
     >
       <v-svg
+        v-if="!isFav"
         name="like"
         height="26"
         width="29"
       />
-    </button>
-    <button
-      v-else
-      @click="isFav = !isFav, removeLike(img)"
-    >
       <v-svg
+        v-else
         name="like-full"
         height="26"
         width="29"
@@ -25,7 +21,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   name: 'ImgComponent',
@@ -43,7 +39,7 @@ export default {
     ...mapState('favorites', ['favorites'])
   },
   methods: {
-    ...mapActions('favorites', ['getFavorites', 'getRemoveItem']),
+    ...mapMutations('favorites', ['updateFav', 'removeFav']),
 
     getBreedName (str) {
       let arr = str.split('/')
@@ -55,11 +51,11 @@ export default {
     },
 
     removeLike (value) {
-      this.getRemoveItem(value)
+      this.removeFav(value)
     }
   },
   created () {
-    this.getFavorites()
+    this.updateFav()
   },
   mounted () {
     this.isFav = this.favorites[this.img]

@@ -1,5 +1,5 @@
 <template>
-  <div class="index">
+  <div class="fav">
     <div class="container">
       <fav-imgs />
     </div>

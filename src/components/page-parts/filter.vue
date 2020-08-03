@@ -54,35 +54,34 @@
       >
         Все пёсели
       </router-link>
+
       <div
         v-if="!routeBreed"
         class="filter__alphabet"
       >
-        <div
-          v-for="(value, key) in breeds"
+        <span
+          @click="item.type === 'breed' ? goTo(item.value) : ''"
+          v-for="(item, key) in alphabetSort"
           :key="key"
+          :class="[{'filter__letter': item.type === 'letter'}, {'filter__breed': item.type ==='breed'}]"
         >
-          <router-link
-            :to="`/${key}`"
-            class="filter__alphabet-line"
-          >
-            {{ key }}
-          </router-link>
-        </div>
+          {{ item.value }}
+        </span>
       </div>
+
       <div
         v-if="routeBreed"
         class="filter__alphabet"
       >
         <div
-          v-for="(value, i) of breeds[routeBreed]"
+          v-for="(item, i) of breeds[routeBreed]"
           :key="i"
         >
           <router-link
-            :to="`/${routeBreed}/${value}`"
-            class="filter__alphabet-line"
+            :to="`/${routeBreed}/${item}`"
+            class="filter__breed"
           >
-            {{ value }}&nbsp;
+            {{ item }}&nbsp;
           </router-link>
         </div>
       </div>
@@ -103,7 +102,26 @@ export default {
     }
   },
   computed: {
-    ...mapState('dogs', ['breeds'])
+    ...mapState('dogs', ['breeds']),
+
+    alphabetSort () {
+      const array = []
+      for (const key in this.breeds) {
+        const letter = key.toUpperCase().slice(0, 1)
+        if (!array.find((item, i) => item.value === letter)) {
+          array.push({
+            value: letter,
+            type: 'letter'
+          })
+        }
+        array.push({
+          value: key,
+          type: 'breed'
+        })
+      }
+
+      return array
+    }
   },
   created () {
     this.getBreeds()
@@ -111,6 +129,10 @@ export default {
   methods: {
     ...mapActions('dogs', ['getBreeds']),
     ...mapMutations('imgs', ['SORT']),
+
+    goTo (link) {
+      this.$router.push(`/${link}`)
+    },
 
     toggleList () {
       this.opened = !this.opened

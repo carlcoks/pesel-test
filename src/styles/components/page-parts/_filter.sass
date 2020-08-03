@@ -6,9 +6,6 @@
     display: flex
     align-items: center
     justify-content: space-between
-    .active
-      border: 1px solid $blue
-      color: $blue
 
   &__title
     line-height: 20px
@@ -93,26 +90,38 @@
     align-items: center
     flex-wrap: wrap
     margin-top: 25px
-    &-line
-      display: flex
-      align-items: center
-      flex-wrap: wrap
-      margin-right: 15px
-      font-size: 12px
-      line-height: 16px
-      color: $grey
-      padding: 5px 10px
-      border: 1px solid $grey
-      border-radius: 16px
-      margin-bottom: 25px
-      text-transform: capitalize
-      cursor: pointer
-      transition: color 0.3s
-      &:hover
-        border: 1px solid $blue
-        color: $blue
-    &-letter
-      color: $grey
-      letter-spacing: 0.01em
-      font-size: 20px
-      line-height: 28px
+
+  &__line
+    display: flex
+    flex-wrap: wrap
+
+  &__breed
+    display: flex
+    align-items: center
+    flex-wrap: wrap
+    margin: 0 7.5px 25px
+    font-size: 12px
+    line-height: 16px
+    color: $grey
+    padding: 5px 10px
+    border: 1px solid $grey
+    border-radius: 16px
+    text-transform: capitalize
+    cursor: pointer
+    transition: color 0.3s
+    &:hover
+      border: 1px solid $blue
+      color: $blue
+    &:first-child
+      margin-left: 0
+
+  &__letter
+    color: $grey
+    letter-spacing: 0.01em
+    font-size: 20px
+    line-height: 28px
+    margin-right: 7.5px
+    margin-bottom: 25px
+    margin-left: 32.5px
+    &:first-child
+      margin-left: 0
